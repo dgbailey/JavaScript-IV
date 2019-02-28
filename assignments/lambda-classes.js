@@ -21,6 +21,18 @@ class Instructor extends Person{
     }
     demo(subject){return `Today we are learning about ${subject}`}
     grade(student,subject){return `${student.name} receives a perfect score on ${subject}.`}
+    adjustPoints(student){
+        if(Math.random() > .5){
+        student.grade = student.grade +=1;}
+        else{student.grade = student.grade +-1}
+        
+    }
+    graduate(student){
+        while (student.grade <70){
+            this.adjustPoints(student);
+            console.log( `Your average is ${student.grade}, you are NOT graduating!`);}
+        
+            console.log(`Your average is ${student.grade}. YOU CAN GRADUATE!!!!`);}
 }
 
 class Student extends Person{
@@ -29,13 +41,15 @@ class Student extends Person{
         this.previousBackground=studentAttributes.previousBackground;
         this.className=studentAttributes.className;
         this.favSubjects=studentAttributes.favSubjects;
-
+        this.grade=studentAttributes.grade;
     }
     listsSubjects(){this.favSubjects.forEach(currentValue => {console.log(currentValue)})
                     };
     PRAssignment(subject){return `this.name has submitted a PR for ${subject}`};
 
     springChallenge(subject){return `${this.name} has begun a sprint challenge on ${subject}`};
+  
+    
 }   
 
 
@@ -82,6 +96,8 @@ const dustin = new Student({
     location: 'Not sure',
     age: 24,
     gender: 'male',
-    previousBackground:'research'
+    previousBackground:'research',
+    grade:68
 })
 console.log(chase.debugsCode(dustin,'JS4'));
+chase.graduate(dustin);
